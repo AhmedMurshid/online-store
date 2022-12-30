@@ -2,34 +2,58 @@
 <html>
   <head>
     <style>
-      nav {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-color: lightgray;
-        height: 50px;
-      }      
-      nav a {
-        display: inline-block;
-        padding: 0 20px;
-        color: black;
-        text-decoration: none;
-        font-size: 18px;
-      }      
-      nav a:hover {
-        color: white;
-      }
-	  #products{
-		margin-top: .5%;
-        height: 20%;
-		width: 10em;
-		
-	  }
-	  article{
-		margin-top: 1%;
-		background-color: lightgray;
+	nav {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: lightgray;
+	height: 50px;
+	}      
+	nav a {
+	display: inline-block;
+	padding: 0 20px;
+	color: black;
+	text-decoration: none;
+	font-size: 18px;
+	}      
+	nav a:hover {
+	color: white;
+	}
+	section{
+	margin-top: .5%;
+	height: 20%;
+	width: 20em;
+	}
+	article{
+	margin-top: 1%;
+	background-color: lightgray;
+	width: 100%;
+	}
+	.product-image:hover{
+		border: 4px solid rgb(255, 255, 255);
+	}
+	section:hover .modal, article:hover .modal {
+	border: 1px solid black;
+	}
 
-	  }
+	section, article {
+	position: relative;
+	}
+
+	.modal {
+	background-color: rgb(173, 173, 252);
+	position: absolute;
+	width: 70%;
+	height: 60%;
+	right: 10%;
+	top: 13%;
+	}
+	.product-image{
+		width: 100%;
+		height: 100%;
+	}
+
+			
 	  
     </style>
   </head>
@@ -39,19 +63,44 @@
     </nav>
 	<section id="products">
 		<h2>Our Products</h2>
-		<article>
+		<article data-description="Description of Product 1" data-price="$19.99" data-product="Product 1">
 			<h3>Product 1</h3>
-			<img src="product1.jpg" alt="Product 1">
-			<p>Description of Product 1</p>
-			<p>Price: $19.99</p>
+			<img src="book.jpg" alt="Product 1" class="product-image">
 		</article>
-		<article>
+		<article data-description="Description of Product 2" data-price="$29.99" data-product="Product 2">
 			<h3>Product 2</h3>
-			<img src="product2.jpg" alt="Product 2">
-			<p>Description of Product 2</p>
-			<p>Price: $29.99</p>
+			<img src="book.jpg" alt="Product 2" class="product-image">
 		</article>
 	</section>
+	<script>
+		const productImages = document.querySelectorAll('.product-image');
+		productImages.forEach(img => {
+		  img.addEventListener('click', event => {
+			const article = event.target.parentNode;
+			const description = article.getAttribute('data-description');
+			const price = article.getAttribute('data-price');
+			const product = article.getAttribute('data-product')
+
+			// Remove the existing modal window if it exists
+			const oldModal = document.querySelector('.modal');
+			if (oldModal) {
+			  oldModal.parentNode.removeChild(oldModal);
+			}
+
+			// Create the new modal window and populate it with the product details
+			const modal = document.createElement('div');
+			modal.setAttribute('class', 'modal');
+			modal.innerHTML = `
+			  <h3>${product}</h3>
+			  <p>${description}</p>
+			  <p>Price: ${price}</p>`;
+
+			document.body.appendChild(modal);
+		  });
+		});
+
+
+	</script>
 
   </body>
 </html>
