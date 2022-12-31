@@ -3,12 +3,13 @@
   <head>
     <style>
 	nav {
+	position: absolute; /* position the nav element absolutely */
+	right: 1%; /* align the right edge of the nav element with the right edge of the browser */
 	display: flex;
-	justify-content: center;
 	align-items: center;
 	background-color: lightgray;
-	height: 50px;
-	}      
+	}
+
 	nav a {
 	display: inline-block;
 	padding: 0 20px;
@@ -19,18 +20,31 @@
 	nav a:hover {
 	color: white;
 	}
+	.nav-item{
+		display: none;
+	}
+	nav:hover .nav-item {
+	display: block;
+	border-left: 1px solid #000;
+
+	}
+
+
+	h2,h3{
+		text-align: center;
+	}
 	section{
 	margin-top: .5%;
-	height: 20%;
+	height: 25%;
 	width: 20em;
 	}
 	article{
 	margin-top: 1%;
-	background-color: lightgray;
+	background-color: rgb(255, 255, 255);
 	width: 100%;
 	}
 	.product-image:hover{
-		border: 4px solid rgb(255, 255, 255);
+		border: 12px solid rgb(255, 255, 255);
 	}
 	section:hover .modal, article:hover .modal {
 	border: 1px solid black;
@@ -41,66 +55,129 @@
 	}
 
 	.modal {
-	background-color: rgb(173, 173, 252);
+	background-color: rgb(253, 210, 210);
 	position: absolute;
-	width: 70%;
+	width: 60%;
 	height: 60%;
-	right: 10%;
+	right: 15%;
 	top: 13%;
 	}
 	.product-image{
 		width: 100%;
 		height: 100%;
 	}
+	#cart {
+	background-color: rgb(253, 210, 210);
+	position: absolute;
+	width: 11%;
+	height: 60%;
+	right: 1%;
+	top: 4%;
+	display: none;
+	}
+	#cart-items{
+		float: right;
+	}
+
+
 
 			
 	  
     </style>
   </head>
   <body>
-    <nav>
-      <a href="#">Cart</a>
-    </nav>
+	<nav id="nav">
+	  <a href="#" onclick="showCart()">Cart</a>
+	</nav>
 	<section id="products">
-		<h2>Our Products</h2>
-		<article data-description="Description of Product 1" data-price="$19.99" data-product="Product 1">
-			<h3>Product 1</h3>
-			<img src="book.jpg" alt="Product 1" class="product-image">
-		</article>
-		<article data-description="Description of Product 2" data-price="$29.99" data-product="Product 2">
-			<h3>Product 2</h3>
-			<img src="book.jpg" alt="Product 2" class="product-image">
-		</article>
+	  <h2>Our Products</h2>
+	  <article data-description="Description of Product 1" data-price="$19.99" data-product="Product 1">
+		<h3>Product 1</h3>
+		<img src="book.jpg" alt="Product 1" class="product-image">
+		<button class="add-to-cart" onclick="addToNav(this.parentNode.getAttribute('data-product'), this.parentNode.getAttribute('data-price'))">Add to Cart</button>
+	</article>
+	  <article data-description="Description of Product 2" data-price="$29.99" data-product="Product 2">
+		<h3>Product 2</h3>
+		<img src="book.jpg" alt="Product 2" class="product-image">
+		<button class="add-to-cart" onclick="addToNav(this.parentNode.getAttribute('data-product'), this.parentNode.getAttribute('data-price'))">Add to Cart</button>
+	  </article>
 	</section>
+	<div id="cart" class="hidden">
+	  <h2>Cart</h2>
+	  <div id="cart-items"></div>
+	  <button onclick="buyNow()">Buy Now</button>
+	</div>
 	<script>
-		const productImages = document.querySelectorAll('.product-image');
-		productImages.forEach(img => {
-		  img.addEventListener('click', event => {
-			const article = event.target.parentNode;
-			const description = article.getAttribute('data-description');
-			const price = article.getAttribute('data-price');
-			const product = article.getAttribute('data-product')
+	  const nav = document.querySelector('#nav a');
+	  const cart = document.querySelector('#cart');
+	  const cartItems = document.querySelector('#cart-items');
+	  let numItems = 0;
+	  let items = [];
+  
+	  function addToNav(product, price) {
+		numItems++;
+		nav.textContent = `Cart (${numItems})`;
+		items.push({ product, price });
+		}
 
-			// Remove the existing modal window if it exists
-			const oldModal = document.querySelector('.modal');
-			if (oldModal) {
-			  oldModal.parentNode.removeChild(oldModal);
+  
+		function showCart() {
+			if (items.length > 0) {
+				cart.style.display = 'block';
+				cartItems.innerHTML = '';
+				let total = 0;
+				for (const item of items) {
+				const li = document.createElement('li');
+				li.textContent = `${item.product} - ${item.price}`;
+				total += parseFloat(item.price.slice(1)); // remove the "$" sign and add the price to the total
+				cartItems.appendChild(li);
+				}
+				const totalSpan = document.createElement('span');
+				totalSpan.textContent = `Total: $${total.toFixed(2)}`; // display the total with 2 decimal places
+				cart.appendChild(totalSpan);
+			}
 			}
 
-			// Create the new modal window and populate it with the product details
-			const modal = document.createElement('div');
-			modal.setAttribute('class', 'modal');
-			modal.innerHTML = `
-			  <h3>${product}</h3>
-			  <p>${description}</p>
-			  <p>Price: ${price}</p>`;
 
-			document.body.appendChild(modal);
-		  });
+  
+	  function buyNow() {
+		cart.classList.add('hidden');
+		nav.textContent = 'Cart';
+		numItems = 0;
+		items = [];
+		cartItems.innerHTML = '';
+		const totalSpan = document.querySelector('#cart span');
+		if (totalSpan) {
+			totalSpan.parentNode.removeChild(totalSpan);
+		}
+	  }
+  
+	  const productImages = document.querySelectorAll('.product-image');
+	  productImages.forEach(img => {
+		img.addEventListener('click', event => {
+		  const article = event.target.parentNode;
+		  const description = article.getAttribute('data-description');
+		  const price = article.getAttribute('data-price');
+		  const product = article.getAttribute('data-product')
+  
+		  // Remove the existing modal window if it exists
+		  const oldModal = document.querySelector('.modal');
+		  if (oldModal) {
+			oldModal.parentNode.removeChild(oldModal);
+		  }
+  
+		  // Create the new modal window and populate it with the product details
+		  const modal = document.createElement('div');  
+		  modal.setAttribute('class', 'modal');
+		  modal.innerHTML = `
+			<h3>${product}</h3>
+			<p>${description}</p>
+			<p>Price: ${price}</p>`;
+  
+		  document.body.appendChild(modal);
 		});
-
-
+	  });
 	</script>
-
   </body>
+  
 </html>
