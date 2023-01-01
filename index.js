@@ -8,23 +8,49 @@ function addToNav(product, price) {
     numItems++;
     nav.textContent = `Cart (${numItems})`;
     items.push({ product, price });
+    cart.style.display = 'none';
 }
 
 
 function showCart() {
-    if (items.length > 0) {
+    cartItems.innerHTML = '';
+    // totalSpan = document.createElement('li');
+    // totalSpan.setAttribute('class', 'total');
+    if (items.length >= 0) {
         cart.style.display = 'block';
-        cartItems.innerHTML = '';
         let total = 0;
+        const itemCount = {};
+        
+
         for (const item of items) {
-        const li = document.createElement('li');
-        li.textContent = `${item.product} - ${item.price}`;
-        total += parseFloat(item.price.slice(1)); // remove the "$" sign and add the price to the total
-        cartItems.appendChild(li);
+            if (!itemCount[item.product]) {
+                itemCount[item.product] = 0;
+            }
+            itemCount[item.product]++;
+            total += parseFloat(item.price.slice(1)); 
         }
-        const totalSpan = document.createElement('span');
-        totalSpan.textContent = `Total: $${total.toFixed(2)}`; // display the total with 2 decimal places
+        // if (totalSpan.textContent) {
+        //     totalSpan.remove();
+        // }
+
+        for (const [product, count] of Object.entries(itemCount)) {
+            const li = document.createElement('li');
+            li.textContent = `${product} - ${count}`;
+            cartItems.appendChild(li);
+        }
+        
+        //const totalSpan = cart.querySelector('.total');  // Check if element exists
+        totalSpan = document.createElement('span');
+        totalSpan.setAttribute('class', 'total');
+        totalSpan.textContent = `Total: $${total.toFixed(2)}`;
         cart.appendChild(totalSpan);
+        const oldModal = document.querySelector('.modal');
+        oldModal.style.display = 'none';
+
+        // if (totalSpan) {
+        //     totalSpan.parentNode.removeChild(totalSpan);
+        // }
+        
     }
 }
 
@@ -32,6 +58,7 @@ function showCart() {
 
 function buyNow() {
     cart.classList.add('hidden');
+    //cart.remove()
     nav.textContent = 'Cart';
     numItems = 0;
     items = [];
@@ -41,7 +68,13 @@ function buyNow() {
         totalSpan.parentNode.removeChild(totalSpan);
     }
 }
+function closeCart() {
+    cart.classList.add('hidden');
+    cart.style.display = 'none';
 
+  }
+
+ 
 const productImages = document.querySelectorAll('.product-image');
 productImages.forEach(img => {
 img.addEventListener('click', event => {
@@ -50,20 +83,18 @@ img.addEventListener('click', event => {
     const price = article.getAttribute('data-price');
     const product = article.getAttribute('data-product')
 
-    // Remove the existing modal window if it exists
     const oldModal = document.querySelector('.modal');
     if (oldModal) {
     oldModal.parentNode.removeChild(oldModal);
     }
 
-    // Create the new modal window and populate it with the product details
     const modal = document.createElement('div');  
     modal.setAttribute('class', 'modal');
     modal.innerHTML = `
     <h3>${product}</h3>
     <p>${description}</p>
     <p>Price: ${price}</p>`;
-
+    cart.style.display = 'none';
     document.body.appendChild(modal);
 });
 });
