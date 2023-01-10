@@ -11,7 +11,7 @@
 		</nav>
 		<section id="products" class="scrollable">
 			<h2>Our Products</h2>
-			<article data-description="Description of Product 1" data-price="$19.99" data-product="Product 1" data-image="book.jpg">
+			<article data-description="Description of Product 1" data-price="$19.99" data-product="Product 1">
 				<h3>Product 1</h3>
 				<img src="book.jpg" alt="Product 1" class="product-image">
 				<button class="add-to-cart" onclick="addToNav(this.parentNode.getAttribute('data-product'), 
@@ -23,7 +23,7 @@
 				<img src="book.jpg" alt="Product 2" class="product-image">
 				<button class="add-to-cart" onclick="addToNav(this.parentNode.getAttribute('data-product'),
 					 this.parentNode.getAttribute('data-price'))">Add to Cart
-				</button>
+			</button>
 			</article>
 		</section>
 		<div id="cart" class="hidden" >
@@ -34,6 +34,8 @@
 			<button onclick="buyNow()" id="buyNow">Buy Now</button>
 		</div>
 		<script src="index.js"></script>
+		<script src="testproducts.js"></script>
+
 	</body>
   
 </html>

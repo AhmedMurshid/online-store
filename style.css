@@ -1,3 +1,9 @@
+body{
+    border: 3px solid black;
+    width: 85%;
+    position: relative;
+    left: 10%;
+}
 nav {
 position: absolute;
 right: 1%; 
@@ -29,12 +35,13 @@ h2,h3{
 text-align: center;
 }
 section{
-margin-top: .5%;
 padding: 1%;
 height: 25%;
 width: 14%;
 border: 1px solid black;
-left: 10%;
+left: 0%;
+clear: both;
+overflow: scroll;
 
 }
 
@@ -42,14 +49,16 @@ article{
 margin-top: 1%;
 background-color: rgb(255, 255, 255);
 width: 100%;
-overflow: scroll;
+/* overflow: scroll; */
 
 }
 .product-image:hover{
-border: 3px solid rgb(255, 255, 255);
+    box-shadow:3px 3px 3px red;
+/* border: 3px solid rgb(255, 255, 255); */
 }
 section:hover .modal, article:hover .modal {
-border: 1px solid black;
+    box-shadow: rgb(255, 15, 15) 2px;
+/* border: 1px solid black; */
 }
 
 section, article {
@@ -76,14 +85,11 @@ height: 100%;
 #cart {
 background-color:white;
 color: black;
-float: right;
-width: 50%;
-height: 60%;
-right: 20%;
+width: 100%;
+height: 100%;
 position: absolute;
-top: 10%;
-border: 1px solid black;
-padding: 1%;
+top: 0;
+/* border: 1px solid black; */
 }
 #cart-items{
 text-align: center;
@@ -108,7 +114,7 @@ display: none;
 #buyNow{
 position: relative;
 right: 0;
-top: 0;
+bottom: 0;
 }
 button {
 background-color: lightgray; /* Green */
