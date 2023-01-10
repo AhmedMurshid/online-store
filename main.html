@@ -9,22 +9,26 @@
 		<nav id="nav">
 			<a href="#" onclick="showCart()">Cart</a>
 		</nav>
-		<section id="products">
+		<section id="products" class="scrollable">
 			<h2>Our Products</h2>
-			<article data-description="Description of Product 1" data-price="$19.99" data-product="Product 1">
+			<article data-description="Description of Product 1" data-price="$19.99" data-product="Product 1" data-image="book.jpg">
 				<h3>Product 1</h3>
 				<img src="book.jpg" alt="Product 1" class="product-image">
-				<button class="add-to-cart" onclick="addToNav(this.parentNode.getAttribute('data-product'), this.parentNode.getAttribute('data-price'))">Add to Cart</button>
+				<button class="add-to-cart" onclick="addToNav(this.parentNode.getAttribute('data-product'), 
+					this.parentNode.getAttribute('data-price'), this.parentNode.getAttribute('data-image'))">Add to Cart
+				</button>
 			</article>
 			<article data-description="Description of Product 2" data-price="$29.99" data-product="Product 2">
 				<h3>Product 2</h3>
 				<img src="book.jpg" alt="Product 2" class="product-image">
-				<button class="add-to-cart" onclick="addToNav(this.parentNode.getAttribute('data-product'), this.parentNode.getAttribute('data-price'))">Add to Cart</button>
+				<button class="add-to-cart" onclick="addToNav(this.parentNode.getAttribute('data-product'),
+					 this.parentNode.getAttribute('data-price'))">Add to Cart
+				</button>
 			</article>
 		</section>
-		<div id="cart" class="hidden">
+		<div id="cart" class="hidden" >
+			<div class="topPart"><h2>Cart</h2></div>
 			<button onclick="closeCart()" id="close">X</button>
-			<h2>Cart</h2>
 			<div id="cart-items"></div>
 			<span class="total"></span>
 			<button onclick="buyNow()" id="buyNow">Buy Now</button>

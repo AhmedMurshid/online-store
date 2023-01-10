@@ -34,11 +34,16 @@ padding: 1%;
 height: 25%;
 width: 14%;
 border: 1px solid black;
+left: 10%;
+
 }
+
 article{
 margin-top: 1%;
 background-color: rgb(255, 255, 255);
 width: 100%;
+overflow: scroll;
+
 }
 .product-image:hover{
 border: 3px solid rgb(255, 255, 255);
@@ -55,9 +60,9 @@ position: relative;
 background-color:white;
 color: black;
 float: right;
-width: 73%;
+width: 50%;
 height: 60%;
-right: 8%;
+right: 20%;
 position: absolute;
 top: 10%;
 border: 1px solid black;
@@ -72,9 +77,9 @@ height: 100%;
 background-color:white;
 color: black;
 float: right;
-width: 73%;
+width: 50%;
 height: 60%;
-right: 8%;
+right: 20%;
 position: absolute;
 top: 10%;
 border: 1px solid black;
@@ -82,17 +87,28 @@ padding: 1%;
 }
 #cart-items{
 text-align: center;
+position: relative;
+top: 20%;
+}
+.topPart{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: lightgray;
 }
 #close {
-font-size: 10px;
+font-size: 20px;
 padding: 1%;
+position: relative;
 }
 .hidden {
 display: none;
 }
 #buyNow{
 position: relative;
-bottom: -60%;
+right: 0;
+top: 0;
 }
 button {
 background-color: lightgray; /* Green */
@@ -107,6 +123,5 @@ margin: 4px 2px;
 cursor: pointer;
 }
 .total{
-bottom: 0;
+position: relative;
 }
-

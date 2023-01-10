@@ -104,6 +104,7 @@ img.addEventListener('click', event => {
     const modal = document.createElement('div');  
     modal.setAttribute('class', 'modal');
     modal.innerHTML = `
+    <div class="topPart"><h2>${product}</h2></div>
     <h3>${product}</h3>
     <p>${description}</p>
     <p>Price: ${price}</p>`;
