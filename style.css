@@ -1,6 +1,7 @@
 body{
     border: 3px solid black;
     width: 85%;
+    height: 50em;
     position: relative;
     left: 10%;
 }
@@ -35,9 +36,9 @@ h2,h3{
 text-align: center;
 }
 section{
-padding: 1%;
-height: 25%;
-width: 14%;
+height: 100%;
+width: 15%;
+padding: 0 1em;
 border: 1px solid black;
 left: 0%;
 clear: both;

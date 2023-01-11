@@ -5,58 +5,18 @@ let numItems = 0;
 let items = [];
 let total = 0;
 
-const products = [
-    {name: "Product 3", description: "Description of Product 3", price: "$39.99",iamge1: ("/home/pc/Desktop/online-store/car.jpg")},// call image path
-    {name: "Product 4", description: "Description of Product 4", price: "$49.99",iamge1: ("/home/pc/Desktop/online-store/car.jpg")},
-    {name: "Product 5", description: "Description of Product 5", price: "$59.99",iamge1: ("/home/pc/Desktop/online-store/car.jpg")},
-    {name: "Product 6", description: "Description of Product 6", price: "$69.99",iamge1: ("/home/pc/Desktop/online-store/car.jpg")},
-    {name: "Product 7", description: "Description of Product 7", price: "$79.99",iamge1: ("/home/pc/Desktop/online-store/car.jpg")}
-];
 
-const container = document.getElementById("products");
-
-for (let i = 0; i < products.length; i++) {
-    const product = document.createElement("article");
-
-    product.setAttribute("data-description", products[i].description);
-    product.setAttribute("data-price", products[i].price);
-    product.setAttribute("data-product", products[i].name);
-    
-    const h3 = document.createElement("h3");
-    h3.innerHTML = products[i].name;
-    product.appendChild(h3);
-
-    const img = document.createElement("img");
-    //img.src = (product.image1);
-    img.setAttribute("src",product.iamge)
-    img.setAttribute("alt", products[i].name);
-    img.setAttribute("class", "product-image");
-    product.appendChild(img);
-    
-    const button = document.createElement("button");
-    button.innerHTML = "Add to Cart";
-    button.setAttribute("class","add-to-cart");
-    button.setAttribute("onclick", `addToNav(this.parentNode.getAttribute('data-product'), this.parentNode.getAttribute('data-price'))`);
-    product.appendChild(button);
-
-    container.appendChild(product);
-}
-
-
-function showFirstThree() {
+function showFirstThree() { // this will show tht first 3 
     const products = document.querySelectorAll("#products article");
     for (let i = 0; i < products.length; i++) {
         if (i < 3) {
             products[i].style.display = "block";
         } else {
-            products[i].style.display = "none";
+            products[i].style.display = "block";
         }
-    }
+    }block
 }
-
-
-
-
+"<img src='x' onerror='alert(1)'>"
 function addToNav(product, price) {
     numItems++;
     nav.textContent = `Cart (${numItems})`;
@@ -114,9 +74,6 @@ function showCart() {
         
     }
 }
-
-
-
 function buyNow() {
     cart.classList.add('hidden');
     //cart.remove()
@@ -129,8 +86,6 @@ function buyNow() {
         // totalSpan.parentNode.removeChild(totalSpan);
         total = 0;
         totalSpan.innerHTML = '';
-
-
     }
 }
 function closeCart() {
@@ -138,8 +93,8 @@ function closeCart() {
     cart.style.display = 'none';
 
   }
+  <script src="testproducts.js"></script>
 
- 
 const productImages = document.querySelectorAll('.product-image');
 productImages.forEach(img => {
 img.addEventListener('click', event => {
@@ -164,6 +119,7 @@ img.addEventListener('click', event => {
     document.body.appendChild(modal);
 });
 });
-// window.onload = function () {
-//     showFirstThree();
-// }
+window.onload = function () {
+
+    //showFirstThree();
+}
